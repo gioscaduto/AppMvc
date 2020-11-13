@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AppMvc.Models.Student>
+
+@{
+    ViewBag.Title = "Students";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <h3>@TempData["Message"].ToString()</h3>
+    </div>
+}
+
+<h2>Students</h2>
+
+<div class="form-group">
+    <a href="@Url.Action("Create", "Students")" class="btn btn-primary">New Student</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "Students", new { id = item.Id })" class="btn btn-warning">Edit</a>
+            <a href="@Url.Action("Details", "Students", new { id = item.Id })" class="btn btn-primary">Details</a>
+            <a href="@Url.Action("Delete", "Students", new { id = item.Id })" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+}
+
+</table>
